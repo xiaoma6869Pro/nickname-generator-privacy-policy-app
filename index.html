@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Name Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1.5" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.15)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #4facfe;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '🔒';
+            font-size: 2rem;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            opacity: 0.3;
+        }
+
+        .highlight-box h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .highlight-box p {
+            color: #34495e;
+            font-weight: 500;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: rgba(248, 250, 252, 0.8);
+            border-radius: 15px;
+            border: 1px solid rgba(226, 232, 240, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #2d3748;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2::before {
+            content: attr(data-icon);
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section p {
+            color: #4a5568;
+            margin-bottom: 15px;
+        }
+
+        .section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #4a5568;
+        }
+
+        .section li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .date {
+            font-weight: 600;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+
+        .offline-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Privacy Policy</h1>
+            <p>Name Generator App</p>
+            <span class="offline-badge">100% Offline • Zero Data Collection</span>
+        </div>
+
+        <div class="content">
+            <div class="highlight-box">
+                <h2>Your Privacy is Our Priority</h2>
+                <p>This Name Generator app is designed with privacy at its core. We operate completely offline and collect absolutely no personal information from our users.</p>
+            </div>
+
+            <div class="section">
+                <h2 data-icon="🛡️">Information We Don't Collect</h2>
+                <p>Our app is built to respect your privacy completely. We do not collect, store, or transmit any of the following:</p>
+                <ul>
+                    <li>Personal names or generated nicknames</li>
+                    <li>Device information or identifiers</li>
+                    <li>Usage patterns or app analytics</li>
+                    <li>Location data</li>
+                    <li>Contact information</li>
+                    <li>Any form of personal data</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 data-icon="📱">How Our App Works</h2>
+                <p>Our Name Generator operates entirely on your device using HTML, CSS, and JavaScript. All name generation happens locally on your device without any internet connection required.</p>
+                <ul>
+                    <li>All processing occurs locally on your device</li>
+                    <li>No data is sent to external servers</li>
+                    <li>Generated names are not stored anywhere</li>
+                    <li>Font and icon selections remain on your device only</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 data-icon="🔐">Data Storage</h2>
+                <p>The app may use your browser's local storage solely to remember your preferences (such as selected fonts or themes) for a better user experience. This data:</p>
+                <ul>
+                    <li>Stays only on your device</li>
+                    <li>Is never transmitted anywhere</li>
+                    <li>Can be cleared by you at any time</li>
+                    <li>Contains no personal information</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 data-icon="🌐">Third-Party Services</h2>
+                <p>Our app does not integrate with any third-party services, analytics platforms, or advertising networks. We maintain complete independence to ensure your privacy.</p>
+            </div>
+
+            <div class="section">
+                <h2 data-icon="👶">Children's Privacy</h2>
+                <p>Since we don't collect any information from anyone, our app is safe for users of all ages, including children under 13. No personal information is ever requested or stored.</p>
+            </div>
+
+            <div class="section">
+                <h2 data-icon="🔄">Changes to This Policy</h2>
+                <p>If we ever make changes to this privacy policy, we will update this page with a new date. However, our commitment to not collecting user data will remain unchanged.</p>
+            </div>
+
+            <div class="section">
+                <h2 data-icon="📧">Contact Us</h2>
+                <p>If you have any questions about this privacy policy or our app, please feel free to contact us. We're committed to transparency and will be happy to address any concerns.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>This privacy policy is effective as of <span class="date">June 22, 2025</span></p>
+            <p>Name Generator App - Built with privacy in mind</p>
+        </div>
+    </div>
+</body>
+</html>
